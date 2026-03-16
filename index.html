@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RequestMint is a launch-ready B2B SaaS website that turns repeated customer requests into paid offers, subscriptions, and transaction revenue."
+    />
+    <meta name="theme-color" content="#07111c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RequestMint - Turn Requests Into Revenue" />
+    <meta
+      property="og:description"
+      content="A production-ready SaaS landing page focused on turning repeated customer demand into sellable offers and recurring revenue."
+    />
+    <title>RequestMint - Turn Requests Into Revenue</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #07111c;
+        color: #e2e8f0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      ::selection {
+        background: rgba(103, 232, 249, 0.9);
+        color: #07111c;
+      }
+
+      .animate-pulse-slow {
+        animation: pulse-slow 4s ease-in-out infinite;
+      }
+
+      .animate-pulse-slower {
+        animation: pulse-slow 6s ease-in-out infinite;
+      }
+
+      .animate-pulse-slowest {
+        animation: pulse-slow 8s ease-in-out infinite;
+      }
+
+      @keyframes pulse-slow {
+        0%, 100% {
+          opacity: 0.45;
+          transform: scale(1);
+        }
+
+        50% {
+          opacity: 0.8;
+          transform: scale(1.08);
+        }
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Loading site...</div>
+    <script>
+      const tsxTransforms = [
+        {
+          from: /import\s+\{\s*useState,\s*useEffect\s*\}\s+from\s+['"]react['"]\s*;?\s*/,
+          to: "",
+        },
+        {
+          from: /const sliderStyle = \(val: number, max: number\) => \(\{/,
+          to: "const sliderStyle = (val, max) => ({",
+        },
+        {
+          from: /const \[open, setOpen\] = useState<number \| null>\(null\)/,
+          to: "const [open, setOpen] = useState(null)",
+        },
+        {
+          from: /const handleSubmit = \(e: React\.FormEvent\) => \{/,
+          to: "const handleSubmit = (e) => {",
+        },
+        {
+          from: /export default function App\(\)/,
+          to: "function App()",
+        },
+      ];
+
+      async function bootApp() {
+        const root = document.getElementById("root");
+
+        try {
+          const response = await fetch("./src/App.tsx", { cache: "no-store" });
+
+          if (!response.ok) {
+            throw new Error("Could not load src/App.tsx");
+          }
+
+          let source = await response.text();
+
+          for (const transform of tsxTransforms) {
+            source = source.replace(transform.from, transform.to);
+          }
+
+          const runtimeSource =
+            "const { useState, useEffect } = React;\n" +
+            source +
+            "\nconst mountNode = document.getElementById('root');\n" +
+            "const root = ReactDOM.createRoot(mountNode);\n" +
+            "root.render(<App />);\n";
+
+          const compiled = Babel.transform(runtimeSource, {
+            presets: ["react"],
+            sourceType: "script",
+          }).code;
+
+          new Function("React", "ReactDOM", compiled)(React, ReactDOM);
+        } catch (error) {
+          console.error(error);
+          root.innerHTML = '<div style="padding:24px;font-family:system-ui,sans-serif;color:#fca5a5">Failed to load the site. Open the browser console for details.</div>';
+        }
+      }
+
+      bootApp();
+    </script>
+  </body>
+</html>

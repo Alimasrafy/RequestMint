@@ -1,32 +1,87 @@
 # RequestMint
 
-RequestMint is a landing page project prepared for both local preview and GitHub Pages deployment.
+Marketing landing page for **RequestMint**, designed to run in two environments:
 
-## Preview Locally
+- local static preview via VS Code Live Server
+- GitHub Pages deployment via GitHub Actions
 
-Use any static server from the project root. If you use VS Code Live Server, open:
+## Overview
 
-`http://127.0.0.1:5500/index.html`
+This repository contains the RequestMint landing page content, metadata, and deployment workflow.  
+The project still includes Vite/React configuration for development, but the production entry point is also prepared for static hosting so the site can be previewed without a local build step.
 
-## Deploy to GitHub Pages
+## Tech Stack
 
-This repository already includes a GitHub Pages workflow:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- GitHub Pages
 
-- Push the project to GitHub
-- Go to `Settings -> Pages`
-- Set the source to `GitHub Actions`
-- Wait for the deploy workflow to finish
+## Local Development
+
+### Option 1: Static preview
+
+If you want the simplest preview flow, serve the project root with a static server.
+
+Example with VS Code Live Server:
+
+```text
+http://127.0.0.1:5500/index.html
+```
+
+### Option 2: Vite development server
+
+If you have Node.js installed and want the standard dev workflow:
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the URL printed by Vite.
+
+## Deployment
+
+GitHub Pages deployment is handled by:
+
+- [.github/workflows/deploy.yml](/Users/alimasrafyjoy/Downloads/live-website-development-project/.github/workflows/deploy.yml)
+
+### GitHub setup
+
+1. Push the repository to GitHub.
+2. Open `Settings -> Pages`.
+3. Set the source to `GitHub Actions`.
+4. Push to `main` or `master`.
+
+The workflow uploads the repository as a Pages artifact and deploys it automatically.
 
 ## Project Structure
 
-- `index.html` boots the site for static hosting
-- `src/App.tsx` contains the main RequestMint page content
-- `.github/workflows/deploy.yml` deploys the project to GitHub Pages
+```text
+.
+├── .github/workflows/deploy.yml
+├── index.html
+├── package.json
+├── src/
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+├── tsconfig.json
+└── vite.config.ts
+```
 
-## Brand
+## Notes
 
-All visible project branding has been aligned to `RequestMint`.
+- [index.html](/Users/alimasrafyjoy/Downloads/live-website-development-project/index.html) is the browser entry point used for static hosting.
+- [src/App.tsx](/Users/alimasrafyjoy/Downloads/live-website-development-project/src/App.tsx) contains the main page sections and copy.
+- [vite.config.ts](/Users/alimasrafyjoy/Downloads/live-website-development-project/vite.config.ts) and [tsconfig.json](/Users/alimasrafyjoy/Downloads/live-website-development-project/tsconfig.json) remain in the repo for Vite/TypeScript-based development.
 
-## Copyright
+## Repository Metadata
 
-Copyright 2026 RequestMint. All rights reserved.
+- Package name: `requestmint`
+- Copyright: `2026 RequestMint`
+
+## License
+
+All rights reserved. Copyright 2026 RequestMint.

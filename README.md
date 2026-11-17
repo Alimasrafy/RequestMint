@@ -1,81 +1,98 @@
 # RequestMint
 
-Marketing landing page for **RequestMint**, designed to run in two environments:
-
-- local static preview via VS Code Live Server
-- GitHub Pages deployment via GitHub Actions
+Marketing landing page for **RequestMint** — turn repeated customer requests into paid digital products, subscriptions, and transaction revenue.
 
 ## Overview
 
-This repository contains the RequestMint landing page content, metadata, and deployment workflow.  
-The project still includes Vite/React configuration for development, but the production entry point is also prepared for static hosting so the site can be previewed without a local build step.
+RequestMint is a production-ready B2B SaaS landing page. It helps agencies, SaaS founders, course creators, and micro-SaaS operators detect recurring demand from support messages and productize it into sellable offers with built-in checkout and delivery.
+
+The site is a single-page, fully responsive landing page with sections for:
+
+- Hero + value proposition
+- Trust / integration bar
+- The hidden problem (repeat-support stats)
+- How it works (4-step funnel)
+- Platform features (6 feature cards)
+- Who it's for (audience use cases)
+- Revenue simulator (interactive calculator)
+- Testimonials / social proof
+- Pricing (3 plans)
+- FAQ (accordion)
+- Signup CTA + footer
 
 ## Tech Stack
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- GitHub Pages
+- **React 19** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS 4** (styling)
+- **GitHub Pages** (hosting)
 
 ## Local Development
 
-### Option 1: Static preview
-
-If you want the simplest preview flow, serve the project root with a static server.
-
-Example with VS Code Live Server:
-
-```text
-http://127.0.0.1:5500/index.html
-```
-
-### Option 2: Vite development server
-
-If you have Node.js installed and want the standard dev workflow:
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the dev server:
+
+```bash
 npm run dev
 ```
 
-Then open the URL printed by Vite.
+Open the URL printed by Vite (usually `http://localhost:5173`).
 
-## Deployment
+Build for production:
 
-GitHub Pages deployment is handled by:
+```bash
+npm run build
+```
 
-- [.github/workflows/deploy.yml](/Users/alimasrafyjoy/Downloads/live-website-development-project/.github/workflows/deploy.yml)
+Preview the production build locally:
 
-### GitHub setup
+```bash
+npm run preview
+```
 
-1. Push the repository to GitHub.
-2. Open `Settings -> Pages`.
-3. Set the source to `GitHub Actions`.
-4. Push to `main` or `master`.
+## GitHub Pages Deployment
 
-The workflow uploads the repository as a Pages artifact and deploys it automatically.
+Push the repository to GitHub, then:
+
+1. Go to **Settings → Pages** in your repository.
+2. Under "Build and deployment", set **Source** to **GitHub Actions**.
+3. Push to `main` (or `master`).
+
+On every push, the workflow at `.github/workflows/deploy.yml` will:
+
+1. Install dependencies
+2. Build the site with Vite (`npm run build`)
+3. Deploy the `dist/` folder to GitHub Pages
+
+Your site will be live at:
+
+```
+https://alimasrafy.github.io/RequestMint/
+```
 
 ## Project Structure
 
 ```text
 .
-├── .github/workflows/deploy.yml
-├── index.html
+├── .github/workflows/deploy.yml   # GitHub Actions → GitHub Pages deploy
+├── index.html                      # Vite entry / production HTML entry point
 ├── package.json
+├── public/
+│   ├── 404.html                    # GitHub Pages 404 fallback
+│   ├── robots.txt                  # SEO
+│   └── sitemap.xml                 # SEO
 ├── src/
-│   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
+│   ├── App.tsx                     # Main page (all sections)
+│   ├── index.css                   # Custom CSS + Tailwind base
+│   └── main.tsx                    # React entry point
 ├── tsconfig.json
-└── vite.config.ts
+└── vite.config.ts                  # Vite config (base: "./" for GitHub Pages subpath)
 ```
-
-## Notes
-
-- [index.html](/Users/alimasrafyjoy/Downloads/live-website-development-project/index.html) is the browser entry point used for static hosting.
-- [src/App.tsx](/Users/alimasrafyjoy/Downloads/live-website-development-project/src/App.tsx) contains the main page sections and copy.
-- [vite.config.ts](/Users/alimasrafyjoy/Downloads/live-website-development-project/vite.config.ts) and [tsconfig.json](/Users/alimasrafyjoy/Downloads/live-website-development-project/tsconfig.json) remain in the repo for Vite/TypeScript-based development.
 
 ## Repository Metadata
 

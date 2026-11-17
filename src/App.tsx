@@ -64,7 +64,12 @@ function NavBar() {
             </a>
           </div>
           
-          <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button
+            className="md:hidden text-white"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -774,6 +779,8 @@ function FAQ() {
             <div key={i} className="bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden">
               <button
                 className="w-full flex items-center justify-between p-6 text-left"
+                aria-expanded={open === i}
+                aria-controls={`faq-answer-${i}`}
                 onClick={() => setOpen(open === i ? null : i)}
               >
                 <span className="text-white font-medium text-sm pr-4">{f.q}</span>
@@ -782,7 +789,7 @@ function FAQ() {
                 </svg>
               </button>
               {open === i && (
-                <div className="px-6 pb-6">
+                <div id={`faq-answer-${i}`} className="px-6 pb-6">
                   <p className="text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">{f.a}</p>
                 </div>
               )}
@@ -913,7 +920,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <NavBar />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative min-h-screen flex items-center">
           <AnimatedHeroBackground />

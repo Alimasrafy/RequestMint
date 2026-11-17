@@ -24,6 +24,24 @@ body {
   color: #07111c;
 }
 
+/* Skip to content link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: #07111c;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 10000;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
 .hero-grid {
   background-image:
     linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),

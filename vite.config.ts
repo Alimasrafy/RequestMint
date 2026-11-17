@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig({
+  // "./" keeps all asset paths relative, so the built site works
+  // both at the root domain and on a GitHub Pages subpath (e.g. /RequestMint/).
   base: "./",
   plugins: [react(), tailwindcss(), viteSingleFile()],
   resolve: {
